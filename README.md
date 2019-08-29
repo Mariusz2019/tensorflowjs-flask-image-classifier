@@ -20,7 +20,7 @@ Inspired by https://github.com/mtobeiyf/keras-flask-deploy-webapp I created simi
 :point_down:Screenshot:
 
 <p align="center">
-  <img src=https://github.com/Mariusz2019/tensorflowjs-flask-image-classifier/blob/master/pictures/sr_u1_2.JPG" width="600px" alt="">
+  <img src="https://github.com/Mariusz2019/tensorflowjs-flask-image-classifier/blob/master/pictures/sr_u1_2.JPG" width="600px" alt="">
 </p>
 
 ------------------
