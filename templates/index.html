@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block libraries %}
+
+
+{% endblock %}
+
+{% block content %}
+
+    <h2>Image Classifier</h2>
+
+    <div>
+
+        <form id="upload-file" method="post" enctype="multipart/form-data">
+        <label for="imageUpload" class="upload-label">
+            Choose...
+        </label>
+        <input type="file" name="image" id="imageUpload" accept=".png, .jpg, .jpeg">
+    </form>
+
+    <div class="image-section" style="display:none;">
+        <div class="img-preview">
+            <img id="imagePreview" src = "" height="256" width="256">
+
+        </div>
+        <h1><span class="badge badge-primary" id="badge-predict">Predict</span></h1>
+    </div>
+
+    <div class="loader" style="display:none;"></div>
+
+    <h3 id="result">
+        <span> </span>
+    </h3>
+
+
+    </div>
+
+{% endblock %}
+
+
+
+{% block javascript %}
+
+    let net;
+    var MyImage;
+
+    // Init
+        $('.image-section').hide();
+        $('.loader').hide();
+        $('#result').hide();
+
+
+        // Upload Preview
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+
+            MyImage = new Image(244,244);
+            MyImage.onload = function(){
+               console.log(MyImage.width); // image is loaded and we have image width
+            }
+            MyImage.src = e.target.result;
+            //document.body.appendChild(MyImage);
+
+                }
+
+            reader.readAsDataURL(input.files[0]);
+
+            }
+        }
+
+        $("#imageUpload").change(function () {
+            $('.image-section').show();
+            $('#btn-predict').show();
+            $('#result').text('');
+            $('#result').hide();
+            readURL(this);
+        });
+
+    async function predict() {
+
+      console.log('Loading mobilenet..');
+      $('.loader').show();
+
+      // Load the model.
+      net = await mobilenet.load();
+      console.log('Sucessfully loaded model');
+
+
+        //const result = await net.classify($('#imagePreview'));
+        const result = await net.classify(MyImage);
+
+        console.log(result);
+
+      //get first prediction only
+        var winner = result[0];
+        var name = winner.className;
+        //console.log(name);
+        $('.loader').hide();
+        $('#result').fadeIn(600);
+        $('#result').text(name);
+        //console.log(name);
+    }
+
+
+    $(document).on('click', '#badge-predict', function(){
+      predict();
+    });
+
+
+{% endblock %}

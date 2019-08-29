@@ -1,0 +1,7 @@
+Werkzeug
+Flask
+numpy
+Keras
+gevent
+tensorflow
+tensorflowjs
