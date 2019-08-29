@@ -30,7 +30,7 @@ Inspired by https://github.com/mtobeiyf/keras-flask-deploy-webapp I created simi
 
 ### Clone the repo
 ```shell
-$ git clone https://github.com/mtobeiyf/tensorflowjs-flask_image-classifier.git
+$ git clone https://github.com/Mariusz2019/tensorflowjs-flask_image-classifier.git
 ```
 
 ### Install requirements
